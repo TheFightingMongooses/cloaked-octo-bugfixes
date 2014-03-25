@@ -20,10 +20,14 @@ def determine_color(color_vector):
 
 def brain(serial_string):
 	values = serial_string.split('`')
-	color = determine_color([int(value) for value in values[-3:]])
+	return [int(value) for value in values[-3:]]
+
 
 if __name__ == '__main__':
     ser = setup_serial()
-    while True:
-        brain(ser.readline())
-        print "~~~~"
+    with open('red.txt', 'a') as sink:
+        while True:
+            newline = ser.readline()
+            #sink.write(",".join(brain(newline)) + "\n")
+            print newline
+            print "~~~~"
